@@ -17,6 +17,11 @@ use Winter\Pages\Classes\Page;
 class Plugin extends PluginBase
 {
     /**
+     * @var array Plugin dependencies
+     */
+    public $require = ['Xitara.TwigExtender'];
+
+    /**
      * Returns information about this plugin.
      *
      * @return array
