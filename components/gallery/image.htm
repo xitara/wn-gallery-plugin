@@ -1,0 +1,57 @@
+{# {% macro image_output(image, title, description, is_lightbox, is_slider, alias, options, no_resize, imageData) %} #}
+
+{% if gallery.is_lightbox == 1 %}
+    <a
+        href="{{ url(imageURL) }}"
+        {% if imageTitle|trim != '' %}
+            data-title="{{ imageTitle|escape('html') }}"
+        {% endif %}
+        {% if description|trim != '' %}
+            data-description="{{ imageDescription|escape('html') }}"
+        {% endif %}
+        class="lightbox-xitara-gallery-{{ __SELF__.alias }}"
+    >
+{% elseif image['link'] is defined and image.link|trim != '' %}
+    <a
+        href="{{ image.link }}"
+        {% if image.is_blank is defined and image.is_blank == 1 %}
+            target="_blank"
+        {% endif %}
+    >
+{% endif %}
+<figure>
+    {{ imageURL
+        |inject({
+            alt: imageTitle,
+            title: imageTitle,
+            classes: 'foo bar foobar',
+            attributes: {
+                'data-foo': 'false',
+                foo: 'bar',
+                foobar: null,
+                num: 1
+            },
+            resize: {
+                width: (gallery.options.image_width > 0) ? gallery.options.image_width ,
+                height: (gallery.options.image_height > 0) ? gallery.options.image_height,
+                ext: 'webp'
+            }
+        })
+    }}
+
+    {% if gallery.options.is_image_title == 1 and imageTitle|trim != ''
+        or imageDescription|trim != '' and gallery.options.is_image_description == 1
+    %}
+        <figcaption>
+            {% if gallery.options.is_image_title == 1 and imageTitle|trim != '' %}
+                <h2>{{ imageTitle }}</h2>
+            {% endif %}
+            {% if gallery.options.is_image_description == 1 and imageDescription|trim != ''%}
+                <div>{{ imageDescription|raw }}</div>
+            {% endif %}
+        </figcaption>
+    {% endif %}
+</figure>
+{% if gallery.is_lightbox == 1 or image['link'] is defined and image.link|trim != '' %}
+    </a>
+{% endif %}

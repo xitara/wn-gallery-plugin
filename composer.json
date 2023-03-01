@@ -1,0 +1,23 @@
+{
+    "name": "xitara/wn-gallery-plugin",
+    "type": "winter-plugin",
+    "description": "Xitara.Gallery for Winter CMS plugin",
+    "keywords": ["winter", "cms", "gallery", "plugin"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Manuel Burghammer",
+            "email": "mb@xitara.com",
+            "role": "Author"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "composer/installers": "~1.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    }
+}

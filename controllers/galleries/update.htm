@@ -1,0 +1,73 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li>
+            <a href="<?= Backend::url('xitara/gallery/galleries') ?>">
+                <?= e(trans_choice('xitara.gallery::lang.submenu.label', 2)); ?>
+            </a>
+        </li>
+        <li>
+            <?= e(trans_choice('xitara.gallery::core.update_m', 1, [
+                'model' => e(trans('xitara.gallery::lang.submenu.label'))
+            ])); ?>
+        </li>
+    </ul>
+<?php Block::endPut() ?>
+
+<?php if (!$this->fatalError): ?>
+
+    <?= Form::open(['class' => 'layout']) ?>
+
+        <div class="layout-row">
+            <?= $this->formRender() ?>
+        </div>
+
+        <div class="form-buttons">
+            <div class="loading-indicator-container">
+                <button
+                    type="submit"
+                    data-request="onSave"
+                    data-browser-validate
+                    data-request-data="redirect:0"
+                    data-hotkey="ctrl+s, cmd+s"
+                    data-load-indicator="<?= e(trans('xitara.gallery::core.saving')); ?>..."
+                    class="btn btn-primary">
+                    <?= trans('xitara.gallery::core.save'); ?>
+                </button>
+                <button
+                    type="button"
+                    data-request="onSave"
+                    data-browser-validate
+                    data-request-data="close:1"
+                    data-hotkey="ctrl+enter, cmd+enter"
+                    data-load-indicator="<?= e(trans('xitara.gallery::core.saving')); ?>..."
+                    class="btn btn-default">
+                    <?= trans('xitara.gallery::core.save_close'); ?>
+                </button>
+                <button
+                    type="button"
+                    class="oc-icon-trash-o btn-icon danger pull-right"
+                    data-request="onDelete"
+                    data-load-indicator="<?= e(trans('xitara.gallery::core.deleting')); ?>..."
+                    data-request-confirm="<?= e(trans('xitara.gallery::core.deleting_confirm')); ?>">
+                </button>
+                <span class="btn-text">
+                    <?= e(trans('xitara.gallery::core.or')); ?>
+                    <a href="<?= Backend::url('xitara/gallery/galleries') ?>">
+                        <?= e(trans('xitara.gallery::core.cancel')); ?>
+                    </a>
+                </span>
+            </div>
+        </div>
+
+    <?= Form::close() ?>
+
+<?php else: ?>
+
+    <p class="flash-message static error"><?= e($this->fatalError) ?></p>
+    <p>
+        <a href="<?= Backend::url('xitara/gallery/galleries') ?>" class="btn btn-default">
+            <?= e(trans('xitara.gallery::core.return_to_list')); ?>
+        </a>
+    </p>
+
+<?php endif ?>

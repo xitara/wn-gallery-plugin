@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Gallery
+
+# Model Form Field configuration
+form: $/xitara/gallery/models/gallery/fields.yaml
+
+# Model Class name
+modelClass: Xitara\Gallery\Models\Gallery
+
+# Default redirect location
+defaultRedirect: xitara/gallery/galleries
+
+# Create page
+create:
+    title: Create Gallery
+    redirect: xitara/gallery/galleries/update/:id
+    redirectClose: xitara/gallery/galleries
+
+# Update page
+update:
+    title: Edit Gallery
+    redirect: xitara/gallery/galleries
+    redirectClose: xitara/gallery/galleries
+
+# Preview page
+preview:
+    title: Preview Gallery

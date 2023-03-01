@@ -1,0 +1,11 @@
+
+<script>
+    if (typeof lightboxSingleConfig === 'undefined') {
+        var lightboxSingleConfig = {
+            loop: {{ (is_loop == 1) ? 'true' : 'false' }},
+            {% if selector|trim != '' %}
+                selector: '{{ selector }}',
+            {% endif %}
+        }
+    }
+</script>

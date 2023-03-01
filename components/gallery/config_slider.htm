@@ -1,0 +1,44 @@
+
+<script>
+    if (typeof slideConfig === 'undefined') {
+        var slideConfig = [];
+    }
+
+    slideConfig['{{ __SELF__.alias }}'] = {
+        container: '#slide-xitara-gallery-{{ __SELF__.alias }}',
+        center: true,
+        autoWidth: true,
+        mode: '{{ config.mode }}',
+        items: {{ config.items }},
+        startIndex: {{ (config.items / 2)|round(0, 'ceil') + 1 }},
+        slideBy: {{ config.slide_by }},
+        gutter: 10,
+        loop: {{ (config.is_loop == 1) ? 'true' : 'false' }},
+        lazyload: {{ (config.is_lazyload == 1) ? 'true' : 'false' }},
+        controls: {{ (config.is_controls == 1) ? 'true' : 'false' }},
+        {% if config.is_controls == 1 %}
+            controlsContainer: '.slider-controls',
+        {% endif %}
+        axis: '{{ config.axis }}',
+        nav: {{ (config.is_nav == 1) ? 'true' : 'false' }},
+        navPosition: '{{ config.nav_position }}',
+        autoplay: {{ (config.is_autoplay == 1) ? 'true' : 'false' }},
+        speed: {{ config.autoplay_speed }},
+        autoplayButtonOutput: {{ (config.is_autoplay_button == 1) ? 'true' : 'false' }},
+        // mouseDrag: true,
+        {{ config.slider_options|raw }}
+        {% if config.responsive|trim != '' %}
+            {% set items = config.responsive|trim|split("\n") %}
+            responsive: {
+            {% for line in items %}
+                {% set item = line|split(':') %}
+                {% set value = item[1]|split('|') %}
+                {{ item[0]|trim }}: {
+                    items: {{ value[0]|trim }},
+                    {{ (value[1] is defined) ? 'gutter: ' ~ value[1] ~ ',' : null }}
+                },
+            {% endfor %}
+            },
+        {% endif %}
+    }
+</script>

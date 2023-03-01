@@ -1,0 +1,37 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    name:
+        label: xitara.gallery::core.name
+        searchable: true
+        sortable: true
+    is_slider:
+        label: xitara.gallery::lang.galleries.is_slider
+        searchable: true
+        sortable: true
+        type: switch
+        align: center
+        width: 12%
+    is_lightbox:
+        label: xitara.gallery::lang.galleries.is_lightbox
+        searchable: true
+        sortable: true
+        type: switch
+        align: center
+        width: 12%
+    created_at:
+        label: xitara.gallery::core.created_at
+        searchable: true
+        sortable: true
+        type: datetime
+        align: center
+        width: 12%
+    updated_at:
+        label: xitara.gallery::core.updated_at
+        searchable: true
+        sortable: true
+        type: datetime
+        align: center
+        width: 12%

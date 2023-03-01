@@ -1,0 +1,12 @@
+
+<script>
+    if (typeof lightboxConfig === 'undefined') {
+        var lightboxConfig = [];
+    }
+
+    lightboxConfig['{{ __SELF__.alias }}'] = {
+        loop: {{ (config.is_loop == 1) ? 'true' : 'false' }},
+        selector: '.lightbox-xitara-gallery-{{ __SELF__.alias }}',
+        {{ config.lightbox_options|raw }}
+    }
+</script>
