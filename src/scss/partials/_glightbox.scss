@@ -1,4 +1,4 @@
-@import '~glightbox/src/postcss/glightbox.css';
+@forward '../../../node_modules/glightbox/dist/css/glightbox.css';
 
 #glightbox-body {
     .goverlay {
