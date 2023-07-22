@@ -16,7 +16,8 @@
 
 @use 'sass:map';
 @use 'sass:meta';
-@use 'bootstrap' as b;
+// @use 'bootstrap' as b;
+@use '../abstracts/variables' as v;
 
 // init list
 $bps: ();
@@ -43,7 +44,9 @@ $bps: ();
 
     // create the 3 variations of breakpoints
     $bps: append($bps, ('#{$name}', $v1 $v2 $media)) !global;
+    $bps: append($bps, ('#{$name}-up', $v2 false $media)) !global;
     $bps: append($bps, ('#{$name}-and-up', $v2 false $media)) !global;
+    $bps: append($bps, ('#{$name}-down', false $v2 $media)) !global;
     $bps: append($bps, ('#{$name}-and-down', false $v2 $media)) !global;
 }
 
@@ -82,13 +85,24 @@ $bps: ();
         $media: all;
     }
 
-    @if $min {
-        @if strip-unit($min) == 0 {
-            $min: false;
-        } @else if unit($min) == 'px' {
-            $min: $min + 1px;
-        } @else if unit($min) == 'em' {
-            $min: $min + 0.0625em;
+    // $minP: false;
+    // @if $min {
+    //     @if strip-unit($min) == 0 {
+    //         $min: false;
+    //     } @else if unit($min) == 'px' {
+    //         $minP: $min + 1px;
+    //     } @else if unit($min) == 'em' {
+    //         $minP: $min + 0.0625em;
+    //     }
+    // }
+
+    @if $max {
+        @if strip-unit($max) == 0 {
+            $max: false;
+        } @else if unit($max) == 'px' {
+            $max: $max + 1px;
+        } @else if unit($max) == 'em' {
+            $max: $max + 0.0625em;
         }
     }
 
@@ -107,11 +121,6 @@ $bps: ();
     } @else {
         @content;
     }
-}
-
-// alias for breakpoint
-@mixin bp($name) {
-    @include breakpoint($name);
 }
 
 // generate breakpoint
@@ -154,8 +163,7 @@ $bps: ();
 // @include new-breakpoint(nav-l, nav-m 1850px);
 
 // set bootstrap breakpoints
-// @each $name, $width in b.$container-max-widths {
-@each $name, $width in b.$grid-breakpoints {
+@each $name, $width in v.$grid-breakpoints {
     @if variable-exists(oldName) {
         // @warn 'Exists: ' $oldName ' > ' $name ' > ' $width;
         @include new-breakpoint($name, $oldName $width);

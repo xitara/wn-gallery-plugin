@@ -7,7 +7,7 @@ import { tns } from 'tiny-slider/src/tiny-slider';
 // import './modules/markjs.js';
 // import './modules/smooth-scroll.js';
 // import './modules/timezone-offset.js';
-import { qs, qsa, $on } from './utils';
+import { qs, qsa, $on } from './modules/utils';
 
 $on(document, 'DOMContentLoaded', () => {
     /**

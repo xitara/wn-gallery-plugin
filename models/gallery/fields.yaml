@@ -236,9 +236,9 @@ tabs:
                 top: xitara.gallery::core.top
             span: storm
             cssClass: col-md-3
-        options[slider][is_nav_overlay]:
+        options[slider][is_nav_overlap]:
             tab: xitara.gallery::lang.gallery.tab.slider
-            label: xitara.gallery::lang.gallery.slider.is_nav_overlay
+            label: xitara.gallery::lang.gallery.slider.is_nav_overlap
             type: switch
             default: 0
             span: storm

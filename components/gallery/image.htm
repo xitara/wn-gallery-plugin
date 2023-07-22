@@ -6,7 +6,7 @@
         {% if imageTitle|trim != '' %}
             data-title="{{ imageTitle|escape('html') }}"
         {% endif %}
-        {% if description|trim != '' %}
+        {% if imageDescription|trim != '' %}
             data-description="{{ imageDescription|escape('html') }}"
         {% endif %}
         class="lightbox-xitara-gallery-{{ __SELF__.alias }}"
@@ -20,20 +20,22 @@
     >
 {% endif %}
 <figure>
+    {% set width = null %}
+    {% set height = null %}
+    {% if gallery.options.image_width != '' %}
+        {% set width = (gallery.options.image_width > 0) ? gallery.options.image_width : gallery.options.gallery_height %}
+    {% endif %}
+    {% if gallery.options.image_height != '' %}
+        {% set height = (gallery.options.image_height > 0) ? gallery.options.image_height : gallery.options.gallery_height %}
+    {% endif %}
+
     {{ imageURL
         |inject({
             alt: imageTitle,
             title: imageTitle,
-            classes: 'foo bar foobar',
-            attributes: {
-                'data-foo': 'false',
-                foo: 'bar',
-                foobar: null,
-                num: 1
-            },
             resize: {
-                width: (gallery.options.image_width > 0) ? gallery.options.image_width ,
-                height: (gallery.options.image_height > 0) ? gallery.options.image_height,
+                width: width,
+                height: height,
                 ext: 'webp'
             }
         })

@@ -44,7 +44,6 @@ class Gallery extends ComponentBase
     {
         $this->addJs('/plugins/xitara/gallery/assets/js/app.js');
         $this->addCss('/plugins/xitara/gallery/assets/css/app.css');
-        $this->addCss('https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css');
 
         $gallery       = GalleryModel::where('slug', $this->property('gallery'))->first();
         $this->gallery = $this->page['gallery'] = $gallery;
@@ -53,12 +52,8 @@ class Gallery extends ComponentBase
 
     public function onRender()
     {
-        // \Log::debug(__METHOD__);
-        // \Log::debug($this->property('gallery'));
-
         $this->addJs('/plugins/xitara/gallery/assets/js/app.js');
         $this->addCss('/plugins/xitara/gallery/assets/css/app.css');
-        $this->addCss('https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/tiny-slider.css');
 
         /**
          * you can override gallery-id from properties with a gallery as component param like

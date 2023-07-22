@@ -12,7 +12,7 @@
         items: {{ config.items }},
         startIndex: {{ (config.items / 2)|round(0, 'ceil') + 1 }},
         slideBy: {{ config.slide_by }},
-        gutter: 10,
+        gutter: 0,
         loop: {{ (config.is_loop == 1) ? 'true' : 'false' }},
         lazyload: {{ (config.is_lazyload == 1) ? 'true' : 'false' }},
         controls: {{ (config.is_controls == 1) ? 'true' : 'false' }},

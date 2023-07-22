@@ -1,0 +1,93 @@
+name: xitara.gallery::block.title.name
+description: xitara.gallery::block.title.description
+icon: icon-laptop
+context: ["pages"]
+fields:
+    section:
+        label: xitara.gallery::block.title.name
+        comment: xitara.gallery::block.title.description
+        span: full
+        type: section
+    heading:
+        label: xitara.gallery::block.heading.label
+        comment: xitara.gallery::block.heading.comment
+        span: left
+        type: text
+        required: true
+    subheading:
+        label: xitara.gallery::block.subheading.label
+        comment: xitara.gallery::block.subheading.comment
+        span: auto
+        type: text
+    text:
+        label: xitara.gallery::block.text.label
+        comment: xitara.gallery::block.text.comment
+        span: full
+        type: richeditor
+        size: huge
+    gallery:
+        label: xitara.gallery::block.gallery.label
+        comment: xitara.gallery::block.gallery.comment
+        span: auto
+        type: dropdown
+    is_container:
+        label: xitara.gallery::block.is_container.label
+        comment: xitara.gallery::block.is_container.comment
+        span: auto
+        type: switch
+        default: 1
+    is_group:
+        label: is_group
+        type: switch
+        default: 1
+        cssClass: hidden
+    is_raw:
+        label: is_raw
+        type: switch
+        default: 1
+        cssClass: hidden
+    classes:
+        label: xitara.gallery::block.classes.label
+        comment: xitara.gallery::block.classes.comment
+        span: auto
+        type: text
+    _alias:
+        label: xitara.gallery::block.alias.label
+        comment: xitara.gallery::block.alias.comment
+        commentHtml: true
+        span: storm
+        cssClass: col-md-3
+        type: text
+        default: gallery
+    is_active:
+        label: xitara.gallery::block.is_active.label
+        comment: xitara.gallery::block.is_active.comment
+        span: storm
+        cssClass: col-md-3
+        type: switch
+        default: 1
+==
+{# you need a partial in your theme with the name/alias 'galleryBlock' witch includes the gallery component. Set gallery-option to 'gallery' #}
+{# example content for galleryBlock.htm
+[gallery galleryBlock]
+gallery = "{{ gallery }}"
+
+[viewBag]
+ ==
+{% component 'galleryBlock' %}
+#}
+<section class="gallery{{ (data.is_container == 1) ? ' gallery-container' }} {{ data.classes }}">
+    {% if data.heading != '' %}
+        <h1>{{ data.heading }}</h1>
+    {% endif %}
+
+    {% if data.subheading != '' %}
+        <h2>{{ data.subheading }}</h2>
+    {% endif %}
+
+    {% if data.text != '' %}
+        <aside>{{ data.text|raw }}</aside>
+    {% endif %}
+
+    {% partial 'galleryBlock' gallery=data.gallery %}
+</section>

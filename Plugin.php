@@ -10,6 +10,7 @@ use Xitara\Gallery\Models\Gallery;
 use System\Classes\PluginBase;
 use System\Classes\PluginManager;
 use Winter\Pages\Classes\Page;
+use Config;
 
 /**
  * Gallery Plugin Information File
@@ -104,7 +105,7 @@ class Plugin extends PluginBase
      *
      * @return array
      */
-    public function registerComponents()
+    public function registerComponents(): array
     {
         return [
             'Xitara\Gallery\Components\Gallery' => 'gallery',
@@ -120,11 +121,27 @@ class Plugin extends PluginBase
     }
 
     /**
+     * Register front-end block for winter/wn-blocks-plugin
+     *
+     * @autor   mburghammer
+     * @date    2023-03-18T14:05:56+01:00
+     * @version 1.0.1
+     * @since   1.0.1
+     * @return  array      defined blocks
+     */
+    public function registerBlocks(): array
+    {
+        return [
+            'gallery' => '$/xitara/gallery/blocks/gallery.block',
+        ];
+    }
+
+    /**
      * Registers any back-end permissions used by this plugin.
      *
      * @return array
      */
-    public function registerPermissions()
+    public function registerPermissions(): array
     {
         $permissions = [
             'xitara.gallery.create' => [
@@ -171,7 +188,7 @@ class Plugin extends PluginBase
                 'label' => $label,
                 'url' => Backend::url('xitara/gallery/galleries'),
                 'icon' => 'icon-leaf',
-                'iconSvg' => 'plugins/xitara/gallery/assets/images/icon-gallery.svg',
+                'iconSvg' => Config::get('cms.pluginsPath') . '/xitara/gallery/assets/images/icon-gallery.svg',
                 'permissions' => ['xitara.gallery.*'],
                 'order' => 500,
             ],

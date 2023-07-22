@@ -16,11 +16,14 @@
                 slider-container {{ gallery.options.slider.css_classes }}
             {% endif %}
             {{ (gallery.options['css_classes'] is defined) ? gallery.options.css_classes }}
+            {{ (gallery.options.slider.is_nav_overlap == 1) ? 'tns-pos-overlap' }}
         "
         style="
             --gallery-height: {{ (gallery.options.gallery_height > 0) ? gallery.options.gallery_height ~ 'px' : '100%' }};
             --image-width: {{ (gallery.options.image_width > 0) ? gallery.options.image_width ~ 'px' : '100%' }};
             --image-height: {{ (gallery.options.image_height > 0) ? gallery.options.image_height ~ 'px' : '100%' }};
+            --nav-position-top: {{ (gallery.options.slider.nav_position == 'top') ? '2rem' : 'initial' }};
+            --nav-position-bottom: {{ (gallery.options.slider.nav_position == 'bottom') ? '1rem' : 'initial' }};
         "
     >
         <ul
@@ -32,30 +35,11 @@
             {% for image in gallery.images %}
                 {% if image.attributes.title|slug('-', activeLocale) in filter or not filter %}
                     <li{% if gallery.is_slider == 1 %} class="slider-item"{% endif %}>
-                        {# don't resize svg #}
-                {#         {% set no_resize = false %}
-                        {% if image.attributes.content_type == 'image/svg' %}
-                            {% set no_resize = true %}
-                        {% endif %} #}
-
                         {% partial __SELF__ ~ "::image"
                             imageURL=image.path
                             imageTitle=image.attributes.title
                             imageDescription=image.attributes.description
                         %}
-
-                    {#     {{ _self.image_output(
-                            image.path,
-                            image.attributes.title,
-                            image.attributes.description,
-                            gallery.is_lightbox,
-                            gallery.is_slider,
-                            __SELF__.alias,
-                            gallery.options,
-                            no_resize,
-                            image
-                        ) }}
-                     #}
                     </li>
                 {% endif %}
             {% endfor %}
@@ -65,29 +49,11 @@
                 {% if image['image'] is defined and image.image|trim != '' %}
                     {% if image.title|slug('-', activeLocale) in filter or not filter %}
                         <li{% if gallery.is_slider == 1 %} class="slider-item"{% endif %}>
-                            {# don't resize svg #}
-                            {# {% set no_resize = false %} #}
-                            {# {% if (image.image|mediadata).art == 'svg' %} #}
-                                {# {% set no_resize = true %} #}
-                            {# {% endif %} #}
-
                             {% partial __SELF__ ~ "::image"
                                 imageURL=image.image|media
                                 imageTitle=image.title
                                 imageDescription=image.description
                             %}
-
-{#                             {{ _self.image_output(
-                                image.image|media,
-                                image.title,
-                                image.description,
-                                gallery.is_lightbox,
-                                gallery.is_slider,
-                                __SELF__.alias,
-                                gallery.options,
-                                no_resize,
-                                image
-                            ) }} #}
                         </li>
                     {% endif %}
                 {% endif %}
@@ -96,15 +62,11 @@
 
         {# left and right controls #}
         {% if gallery.is_slider == 1 and gallery.options.slider.is_controls == 1 %}
-            {% set size = (gallery.options.gallery_height < 1) ?: gallery.options.gallery_height / 2 %}
-            {% if not size or size > 80 %}
-                {% set size = 80 %}
-            {% endif %}
             <ul class="slider-controls" tabindex="0">
-                <li class="prev" style="--size: {{ size }}px" data-controls="prev" tabindex="-1">
+                <li class="prev" data-controls="prev" tabindex="-1">
                     &lsaquo;
                 </li>
-                <li class="next" style="--size: {{ size }}px" data-controls="next" tabindex="-1">
+                <li class="next" data-controls="next" tabindex="-1">
                     &rsaquo;
                 </li>
             </ul>
@@ -117,20 +79,5 @@
 
     {% if gallery.is_lightbox == 1 and gallery.options.lightbox is defined %}
         {% partial __SELF__ ~ "::config_lightbox" config=gallery.options.lightbox %}
-    {% endif %}
-
-    {# move style to css #}
-    {% if gallery.options.slider.is_nav == 1 and gallery.options.slider.is_nav_overlay == 1 %}
-        <style>
-            /* stylelint-disable-next-line */
-            #gallery-{{ __SELF__.alias }} .tns-nav {
-                position: relative;
-                /* stylelint-disable-next-line */
-                {{ gallery.options.slider.nav_position }}: 2rem;
-                left: 0;
-                right: 0;
-                z-index: 10;
-            }
-        </style>
     {% endif %}
 {% endif %}

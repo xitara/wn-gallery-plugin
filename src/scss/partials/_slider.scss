@@ -1,123 +1,102 @@
 @import 'tiny-slider/src/tiny-slider';
 
-.xitara-gallery {
-    // overflow: hidden;
-    // position: relative;
+.slider-container {
+    overflow: hidden;
+    position: relative;
 
-    // &:focus,
-    // *:focus {
-    //     outline: none;
-    // }
+    &:focus,
+    *:focus {
+        outline: none;
+    }
 
     figure {
+        text-align: center;
+        margin: 0 auto;
+        padding: 0 1rem;
+        overflow: hidden;
+        position: relative;
+        height: var(--gallery-height);
         width: var(--image-width);
-        height: var(--image-height);
     }
 
-    img,
-    svg {
-    //     display: inline-block;
-    //     vertical-align: middle;
-    //     // max-width: 100%;
-    //     max-width: none;
-        width: var(--image-width);
-        height: var(--image-height);
+    img {
+        display: inline-block;
+        vertical-align: middle;
         object-fit: cover;
+        width: var(--image-width);
+        height: var(--image-height);
     }
 
-    // .slider-item {
-    //     // position: relative;
-    //     // cursor: pointer;
-    // }
+    // .slider-item:has(a) {
+        // position: relative;
+        // cursor: pointer;
+    // }hnjmmmmmmmmmmmmmm
 
-    // .slider-controls {
-    //     margin: 0;
-    //     padding: 0;
-    //     list-style: none;
+    .slider-controls {
+        margin: 0;
+        padding: 0;
+        list-style: none;
 
-    //     &:focus {
-    //         outline: none;
-    //     }
+        &:focus {
+            outline: none;
+        }
 
-    //     li {
-    //         position: absolute;
-    //         top: 50%;
-    //         transform: translateY(-50%);
+        li {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: bold;
+            color: white;
+            font-size: 5rem;
+            mix-blend-mode: difference;
 
-    //         &.prev {
-    //             left: 0;
-    //         }
+            &.prev {
+                left: 1rem;
 
-    //         &.next {
-    //             right: 0;
-    //         }
-    //     }
+            }
 
-    //     li:hover {
-    //         cursor: pointer;
-    //     }
+            &.next {
+                right: 1rem;
+            }
 
-    //     // & [aria-controls] {
-    //     // font-size: 15px;
-    //     // margin: 0 5px;
-    //     // padding: 0 1em;
-    //     // height: 2.5em;
-    //     // border: 0;
-    //     // }
+            &:hover {
+                cursor: pointer;
+            }
+        }
 
-    //     & [disabled] {
-    //         cursor: not-allowed !important;
-    //     }
+        & [disabled] {
+            cursor: not-allowed !important;
+        }
+    }
 
-    //     // .prev,
-    //     // .next {
-    //     //     margin: 0;
-    //     //     padding: 0;
-    //     //     font-size: 5rem;
-    //     //     // height: 5rem;
-    //     // }
-    // }
+    .lt-ie9 .slider-controls > [aria-controls] {
+        line-height: 2.5em;
+    }
 
-    // figure {
-    //     text-align: center;
-    //     margin: 0 auto;
-    //     overflow: hidden;
-    //     position: relative;
+    &.tns-pos-overlap .tns-nav {
+        position: absolute;
+        top: var(--nav-position-top);
+        bottom: var(--nav-position-bottom);
+        left: 0;
+        right: 0;
+        z-index: 10;
+    }
 
-    //     img {
-    //         display: block;
-    //         margin: auto;
-    //     }
+    .tns-nav {
+        text-align: center;
 
-    //     // h2 {
-    //     //     margin: 0 0 0.25rem;
-    //     // }
+        & > [aria-controls] {
+            width: 0.75rem;
+            height: 0.75rem;
+            padding: 0;
+            margin: 0 0.25rem;
+            border-radius: 50%;
+            background: #ddd;
+            border: 1px solid #777;
+        }
 
-    //     // p {
-    //     //     margin: 0;
-    //     //     padding: 0 0.5rem;
-    //     // }
-    // }
-
-    // .lt-ie9 .slider-controls > [aria-controls] {
-    //     line-height: 2.5em;
-    // }
-
-    // .tns-nav {
-    //     text-align: center;
-
-    //     & > [aria-controls] {
-    //         width: 0.75rem;
-    //         height: 0.75rem;
-    //         padding: 0;
-    //         margin: 0 0.25rem;
-    //         border-radius: 50%;
-    //         background: #ddd;
-    //         border: 1px solid #777;
-    //     }
-
-    //     & > .tns-nav-active {
-    //         background: #333;
-    //     }
-    // }
+        & > .tns-nav-active {
+            background: #333;
+        }
+    }
 }
